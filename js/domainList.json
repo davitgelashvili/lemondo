@@ -1,0 +1,32 @@
+[
+    {
+        "domainName": "example1",
+        "domainExtension": ".ge",
+        "price": 30,
+        "categories": [1,2]
+    },
+    {
+        "domainName": "example2",
+        "domainExtension": ".com.ge",
+        "price": 100,
+        "categories": [2,3]
+    },
+    {
+        "domainName": "example3",
+        "domainExtension": ".edu.ge",
+        "price": 325,
+        "categories": [2]
+    },
+    {
+        "domainName": "example4",
+        "domainExtension": ".ge",
+        "price": 599,
+        "categories": [3]
+    },
+    {
+        "domainName": "example5",
+        "domainExtension": ".org.ge",
+        "price": 800,
+        "categories": [1,3]
+    }
+]

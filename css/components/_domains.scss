@@ -1,0 +1,101 @@
+.domains {
+    &__list {
+        padding: 19px;
+        width: 100%;
+        background-color: #FFFFFF;
+        border: 1px solid #F1F1F5;
+        border-radius: 15px;
+    }
+
+    &__item {
+        padding: 16px 21px;
+        width: 100%;
+        border-radius: 10px;
+        border-bottom: 1px solid #F5F5F8;
+
+        &--icon {
+            margin-right: 20px;
+
+            .hiden-icon {
+                display: none;
+            }
+
+            .show-icon {
+                display: block;
+            }
+        }
+
+        &--title {
+            color: #171D25;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 40px;
+        }
+
+        &--price {
+            text-align: right;
+
+            &.big {
+                color: #171725;
+                font-size: 16px;
+                font-weight: bold;
+                line-height: 22px;
+            }
+            &.smoll {
+                color: #696974;
+                font-size: 12px;
+                line-height: 22px;
+            }
+        }
+    
+        &--btn {
+            cursor: pointer;
+        }
+
+        &--btn-add {
+            display: flex;
+            background: #99CC66;
+            margin-left: 20px;
+            padding: 10px 15px;
+            border-radius: 10px;
+        }
+
+        &--add-text {
+            display: none;
+            margin: 0 7px 0 0;
+            color: #FFFFFF;
+            font-size: 14px;
+        }
+
+        &:hover {
+            background: #F5F5F8;
+        }
+
+        &:hover &--add-text{
+            display: flex;
+        }
+
+        &:hover &--icon{
+            .show-icon {
+                display: none;
+            }
+            .hiden-icon {
+                display: block;
+            }
+        }
+
+        &--btn-delete {
+            display: none;
+            background: #F5F5F8;
+            margin-left: 20px;
+            padding: 10px 15px;
+            border-radius: 10px;
+        }
+
+        &--delete-text {
+            margin: 0 0 0 7px;
+            color: #696974;
+            font-size: 14px;
+        }
+    }
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>LEMONDO</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <figure class="header__top--logo">
+                            <img src="img/svg/domenebi-logo.svg" alt="">
+                        </figure>
+                    </div>
+                    <div class="col-9">
+                        <div class="header__top--bar d-flex justify-content-end align-items-center">
+                            <div class="header__top--btn header__top--notification d-flex align-items-center">    
+                                <img src="img/svg/not.svg" alt="">                            
+                            </div>
+                            <div class="header__top--btn header__top--favorite">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19.94" height="16.594" viewBox="0 0 19.94 16.594">
+                                    <path id="Fill_932" data-name="Fill 932" d="M16.659,16.594h-.833a.958.958,0,0,1-.833-1.045.958.958,0,0,1,.833-1.045h.833a.958.958,0,0,1,.833,1.045A.958.958,0,0,1,16.659,16.594Zm-6.664,0H9.162a.958.958,0,0,1-.833-1.045A.958.958,0,0,1,9.162,14.5h.833a.958.958,0,0,1,.833,1.045A.958.958,0,0,1,9.995,16.594Zm6.2-3.7h-6.6a2.5,2.5,0,0,1-2.4-1.757L4.542,2.2a.837.837,0,0,0-.8-.589H.833A.82.82,0,0,1,0,.806.82.82,0,0,1,.833,0H3.741a2.5,2.5,0,0,1,2.4,1.757l.434,1.467H17.44a2.511,2.511,0,0,1,1.983.946,2.348,2.348,0,0,1,.441,2.06l-1.249,4.834A2.483,2.483,0,0,1,16.19,12.892ZM7.054,4.834l1.731,5.859a.835.835,0,0,0,.8.588h6.6A.828.828,0,0,0,17,10.668l1.25-4.834a.781.781,0,0,0-.148-.684.838.838,0,0,0-.661-.315Z" fill="#92929D"/>
+                                </svg>  
+                                <div class="header__top--favorite-text">0</div>
+                            </div>
+                            <div class="header__top--btn header__top--account">
+                                Kancha Co.
+                            </div>
+                            <div class="header__top--btn header__top--language">
+                                GE
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header__bottom">
+            <div class="container d-flex justify-content-between align-items-center">
+                <ul class="header__menu header__menu--left d-flex align-items-center">
+                    <li class="header__menu--item">
+                        <a href="" class="header__menu--link">დომენი</a>
+                    </li>
+                    <li class="header__menu--item">
+                        <a href="" class="header__menu--link">ტრანსფერი</a>
+                    </li>
+                    <li class="header__menu--item">
+                        <a href="" class="header__menu--link">ჰოსტინგი</a>
+                    </li>
+                </ul>
+                <ul class="header__menu header__menu--right d-flex align-items-center justify-content-end">
+                    <li class="header__menu--item">
+                        <a href="" class="header__menu--link">ჩვენსშ ესახებ</a>
+                    </li>
+                    <li class="header__menu--item">
+                        <a href="" class="header__menu--link">ფასები</a>
+                    </li>
+                    <li class="header__menu--item">
+                        <a href="" class="header__menu--link">კონტაქტი</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="banner d-flex align-items-center justify-content-center" style="background-image: url(img/banner.png);">
+            <h1 class="banner__title">გაყიდე და იყიდე დომენი მარტივად</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <form class="filter">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="input">
+                                <input type="text" class="input__form" placeholder="სახელით ძიება">
+                            </label>
+                        </div>
+
+                        <div class="col-12">
+                            <h1 class="filter__title">ფასი</h1>
+                        </div>
+                        <div class="col-12">
+                            <div class="slide">
+                                <div class="slide__range d-flex align-items-center">
+                                    <div class="slide__range--js"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="input">
+                                            <input type="text" class="input__form" id="minPrice" value="0" placeholder="მინ.">
+                                        </label>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="input">
+                                            <input type="text" class="input__form" id="maxPrice" value="1000" placeholder="მაქს.">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <h1 class="filter__title">სიმბოლოების რაოდენობა</h1>
+                        </div>
+                        <div class="col-12">
+                            <div class="slide">
+                                <div class="slide__range d-flex align-items-center">
+                                    <div class="slide__range--js"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="input">
+                                            <input type="text" class="input__form" value="0" placeholder="მინ.">
+                                        </label>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="input">
+                                            <input type="text" class="input__form" value="500" placeholder="მაქს.">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <h1 class="filter__title">კატეგორიები</h1>
+                        </div>
+                        
+                        <div class="col-12">
+                            <div class="categories">
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <h1 class="filter__title">დომენის ზონა</h1>
+                        </div>
+                        
+                        <div class="col-12">
+                            <div class="domen-zone">
+                                <label class="categories__item d-flex align-items-center">
+                                    <div class="categories__item--checked"></div>
+                                    <input type="checkbox" class="categories__item--input" data-zone=".ge">
+                                    <div class="categories__item--title">
+                                        .ge
+                                    </div>
+                                </label>
+                                <label class="categories__item d-flex align-items-center">
+                                    <div class="categories__item--checked"></div>
+                                    <input type="checkbox" class="categories__item--input" data-zone=".com.ge">
+                                    <div class="categories__item--title">
+                                        .com.ge
+                                    </div>
+                                </label>
+                                <label class="categories__item d-flex align-items-center">
+                                    <div class="categories__item--checked"></div>
+                                    <input type="checkbox" class="categories__item--input" data-zone=".edu.ge">
+                                    <div class="categories__item--title">
+                                        .edu.ge
+                                    </div>
+                                </label>
+                                <label class="categories__item d-flex align-items-center">
+                                    <div class="categories__item--checked"></div>
+                                    <input type="checkbox" class="categories__item--input" data-zone=".org.ge">
+                                    <div class="categories__item--title">
+                                        .org.ge
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="submit" value="ძებნა">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-8">
+                <div class="domains__list">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="js/function.js"></script>    
+</body>
+</html>

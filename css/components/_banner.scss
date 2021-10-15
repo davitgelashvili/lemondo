@@ -1,0 +1,16 @@
+.banner {
+    width: 100%;
+    height: 100vh;
+    max-height: 180px;
+    border-radius: 15px;
+    box-shadow: inset 0px 0px 0px 200px rgba(#000, .4);
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 30px;
+
+    &__title {
+        color: #fff;
+        font-size: 36px;
+        line-height: 37px;
+    }
+}

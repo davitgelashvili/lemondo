@@ -1,0 +1,33 @@
+.slide {
+  
+  &__range{
+    width: 100%;
+    height: 28px;
+    margin: 15px 0;
+
+    &--js {
+      width: 100%;
+      height: 2px;
+      position: relative;
+      background-color: #E5E5ED;
+      border: 2px;
+    }
+  }
+
+  .ui-slider-handle {
+    width: 25px;
+    height: 25px;
+    top: -12px;
+    position: absolute;
+    border: 2px solid #99CC66;
+    background-color: #fff;
+    border-radius: 13px;
+    z-index: 2;
+    outline: none;
+  }
+  .ui-slider-range {
+    height: 100%;
+    position: absolute;
+    background-color: #99CC66;
+  }
+} 
