@@ -1,115 +1,53 @@
 $(document).ready(function(){
     let fav = [];
-    let domains = []
+    let domainExtension = new Array()
     let cat = []
 
-    fetchFunction('js/domainList.json', 'domains');
-    fetchFunction('js/categories.json', 'categories');
+    fetchDomain('js/domainList.json');
+    fetchCategories('js/categories.json');
 
-    function fetchFunction(link, name){
+    function fetchDomain(link){
+        $('.domains__list').html('')
         fetch(link)
         .then(response => response.json())
         .then(json => {
-            if(name == 'domains'){
-                json.map( item=> {
-                    domains.push(item);
-                })
-            }
-
-            if(name == 'categories'){
-                json.map( item=> {
-                    cat.push(item);
-                })
-            }
-
-            domainList();
-            categoriesList()
-            // itemId()
+            json.map( (item, key)=> {
+                domainExtension.push(item);
+                domainItem(item, key)
+            })
         });
     }
 
-    // json.filter(function (item, key) {
-    //     if(item.price > minPrice && item.price < maxPrice) {
-    //         Item(item, key)
-    //     }
-
-    //     if($('.categories__item--input').data('id') == item.categories[0] || $('.categories__item--input').data('id') == item.categories[1]) {
-    //         Item(item, key)
-    //     }
-    // });
-
-    // function itemId(id){
-    //     domainList(id)
-    // }
-
-    // $('.categories').on('change', '.categories__item--input', function() {
-    //     if ($(this).is(":checked")) {
-    //         let id = $(this).data('id')
-    //         itemId(id)
-    //     }
-    // })
-
-
-
-    function domainList(id){
-        $('.domains__list').html('')
-        domains.map((item, key)=>{
-            if(item.price > $('#minPrice').val() && item.price < $('#maxPrice').val()) {
-                domainItem(item, key)
-            }
-            
-            if($('.categories__item--input').is(":checked")){
-                $('.categories__item--input').on( function() {
-                    let zone = $(this).data('zone')
-                    console.log(this)
-                    if(zone == item.domainExtension){
-                        console.log('dsds',zone == item.domainExtension)
-                        domainItem(item, key)
-                    }  
-                })
-            }
-        })
+    function fetchCategories(link){
+        fetch(link)
+        .then(response => response.json())
+        .then(json => {
+            json.map( (item, key)=> {
+                categoriesItem(item, key);
+            })
+        });
     }
 
-    function categoriesList(){
-        cat.map((item, key)=>{
-            categoriesItem(item, key);
-            console.log(item)
-        })
-    }
+    $('.filter').on('change', 'input', function(event) {
+        if(true){
+            $('.domains__list').html('');
+            domainExtension.map((item, key)=>{
+                console.log(item.price > $('#minPrice').val() && item.price < $('#maxPrice').val())
+                if(item.price > $('#minPrice').val() && item.price < $('#maxPrice').val()){
+                    domainItem(item, key)
+                }
+            })
+        }
 
-    // function price(item){
-    //     if(item.price > minPrice && item.price < maxPrice) {
-    //         domainItem(item, key)
-    //     }
-    // }
-
-    // function ragaca(item, key){
-    //     $('.categories').on('change', '.categories__item--input', function() {
-    //         if ($(this).is(":checked")) {
-    //             console.log($(this).data('id'))
-    //             // fetchFunction('js/domainList.json', 'domains');
-    //             if($(this).data('id') == item.categories[0] || $(this).data('id') == item.categories[1]) {
-    //                 cat.push(item)
-    //                 console.log(cat)
-    //             }
-    //         }
-    //     })
-    // }
-
-    // function domainCategories(data){
-    //     data.map( items=> {
-    //         items.categories.filter( item=> {
-    //             $('.categories').on('change', '.categories__item--input', function() {
-    //                 if ($(this).is(":checked")) {
-    //                     item.filter( i=> {
-    //                         console.log(i)
-    //                     })
-    //                 }
-    //             })
-    //         })
-    //     })
-    // }
+        if($(this).data('zone') && $(this).is(":checked")){
+            $('.domains__list').html('')
+            domainExtension.map((item, key)=>{
+                if(item.domainExtension == $(this).data('zone')){
+                    domainItem(item, key)
+                }
+            })
+        }
+    })
 
     // select categories vizual
     function categoriesItem(item, key){
@@ -186,10 +124,9 @@ $(document).ready(function(){
     });
 
     // submit
-    $('.filter').submit(function( event ) {
-        event.preventDefault();
-        domainList()
-    });
-
+    // $('.filter').submit(function( event ) {
+    //     event.preventDefault();
+    //     domainList()
+    // });
 
 })
