@@ -1,60 +1,97 @@
 $(document).ready(function(){
+    // favorites data
     let fav = [];
-    let domainExtension = new Array()
-    let cat = []
 
-    fetchDomain('js/domainList.json');
-    fetchCategories('js/categories.json');
+    //item data
+    let array = [
+    ];
 
-    function fetchDomain(link){
-        $('.domains__list').html('')
+    // filter
+    let filters = {
+        text: null,
+        priceMin: null,
+        priceMax: null,
+        symbolMin: null,
+        symbolMax: null,
+        categories: [],
+        zone: [],
+    }
+
+    let data = (link, name) => {
         fetch(link)
         .then(response => response.json())
         .then(json => {
-            json.map( (item, key)=> {
-                domainExtension.push(item);
-                domainItem(item, key)
+            json.forEach( (item, key)=> {
+                if(name == 'domains'){
+                    array.push(item)
+                    domainItem(item, key)
+                }
+
+                if(name == 'categories') {
+                    categoriesItem(item, key)
+                }
             })
         });
     }
+    data('js/domainList.json', 'domains');
+    data('js/categories.json', 'categories');
 
-    function fetchCategories(link){
-        fetch(link)
-        .then(response => response.json())
-        .then(json => {
-            json.map( (item, key)=> {
-                categoriesItem(item, key);
-            })
-        });
+    // filter func
+    let filterDomains = () =>{
+        var text =  $("[name='text']").val();
+
+        // min & max price value
+        var priceMin =  $("[name='minprice']").val();
+        var priceMax = $("[name='maxprice']").val();
+
+        // min & max symbol value
+        var symbolMin =  $("[name='minsymbol']").val();
+        var symbolMax = $("[name='maxsymbol']").val();
+
+        // get checked
+        var zones = $("[name='zone']:checkbox:checked").map(function(){
+            return $(this).data('zone');
+        }).get();  
+
+        var categories = $("[name='categories']:checkbox:checked").map(function(){
+            return $(this).data('id');
+        }).get();  
+        
+        let filtered =  array.filter(item => 
+            (!text || item.domainName == text) &&
+            (!priceMin || item.price >= priceMin) &&
+            (!priceMax || item.price <= priceMax) &&
+            (!symbolMin || item.domainName.length >= symbolMin) &&
+            (!symbolMax || item.domainName.length <= symbolMax) &&
+            (!zones.length || zones.some(zone => zone == item.domainExtension)) &&
+            (!categories.length || categories.some((categorie, key) => categorie == item.categories[key]))
+        )
+
+        // clear html element
+        $('.domains__list').html('');
+ 
+        return filtered.map ( (item, key) => domainItem(item, key));
     }
 
+    // input change
     $('.filter').on('change', 'input', function(event) {
-        if(true){
-            $('.domains__list').html('');
-            domainExtension.map((item, key)=>{
-                console.log(item.price > $('#minPrice').val() && item.price < $('#maxPrice').val())
-                if(item.price > $('#minPrice').val() && item.price < $('#maxPrice').val()){
-                    domainItem(item, key)
-                }
-            })
-        }
+        filters.name =  $("[name='text']").val();
+        filters.minPrice =  $("[name='minprice']").val();
+        filters.maxPrice = $("[name='maxprice']").val();
 
-        if($(this).data('zone') && $(this).is(":checked")){
-            $('.domains__list').html('')
-            domainExtension.map((item, key)=>{
-                if(item.domainExtension == $(this).data('zone')){
-                    domainItem(item, key)
-                }
-            })
-        }
+        filters.minPrice =  $("[name='minsymbol']").val();
+        filters.maxPrice = $("[name='maxsymbol']").val();
+        
+        // call filter func 
+        filterDomains();
     })
 
     // select categories vizual
-    function categoriesItem(item, key){
+    var categoriesItem = (item) => {
         $('.categories').append(`
             <label class="categories__item d-flex align-items-center">
                 <div class="categories__item--checked"></div>
-                <input type="checkbox" class="categories__item--input" data-id="${item.id}">
+                <input type="checkbox" name="categories" class="categories__item--input" data-id="${item.id}">
                 <div class="categories__item--title">
                     ${item.name}
                 </div>
@@ -63,9 +100,9 @@ $(document).ready(function(){
     }
 
     // domain item visual
-    function domainItem(item, key){
+    var domainItem = (item, key) => {
         $('.domains__list').append(`
-            <div class="domains__item d-flex justify-content-between align-items-center" data-id="${key}">
+            <div class="domains__item d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <figure class="domains__item--icon">
                         <img src="img/svg/Btn_send.svg" class="show-icon" alt="">
@@ -101,12 +138,24 @@ $(document).ready(function(){
 
     // favorite
     $('.domains__list').on('click', '.domains__item--btn-add', function() {
-        $(this).css('display','none')
+        $(this).hide();
         $(this).parent().find('.domains__item--btn-delete').css('display','flex')
 
         let key = $(this).data('key')
-        fav.push(key)
-        $('.header__top--favorite-text').html(fav.length);
+        fav.push(array[key] )
+        localStorage.setItem('fav', JSON.stringify(fav) );
+        $('.header__top--favorite-text').html(JSON.parse(localStorage.fav).length);
+    })
+
+    localStorage.fav ? $('.header__top--favorite-text').html(JSON.parse(localStorage.fav).length) : '';
+
+    $('.header__top--favorite').on('click', function() {
+        let favoriteDAta = localStorage.fav ? JSON.parse(localStorage.fav) : '';
+        $('.domains__list').html('');
+        localStorage.fav ? favoriteDAta.map( (item, key)=> {
+            domainItem(item, key)
+            console.log(item)
+        }) : filterDomains();;
     })
 
     // range slide
@@ -118,15 +167,8 @@ $(document).ready(function(){
         slide: function( event, ui ) {
             let inputCount = $(this).parent().parent().find('.input__form');
             for (i = 0 ; i < inputCount.length; i++){
-                inputCount[i].value = ui.values[i]
+                inputCount[i].value 
             }
         }
     });
-
-    // submit
-    // $('.filter').submit(function( event ) {
-    //     event.preventDefault();
-    //     domainList()
-    // });
-
 })
