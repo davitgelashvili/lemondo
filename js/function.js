@@ -154,12 +154,11 @@ $(document).ready(function(){
         $('.domains__list').html('');
         localStorage.fav ? favoriteDAta.map( (item, key)=> {
             domainItem(item, key)
-            console.log(item)
         }) : filterDomains();;
     })
 
     // range slide
-    $( ".slide__range--js" ).slider({
+    $('.slide__range--js').slider({
         range: true,
         min: 0,
         max: 1200,
@@ -167,7 +166,7 @@ $(document).ready(function(){
         slide: function( event, ui ) {
             let inputCount = $(this).parent().parent().find('.input__form');
             for (i = 0 ; i < inputCount.length; i++){
-                inputCount[i].value 
+                inputCount[i].value = ui.values[i]
             }
         }
     });
